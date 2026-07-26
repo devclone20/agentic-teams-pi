@@ -62,6 +62,9 @@ refuses to touch a corrupt settings.json, preserves your engine toggles on re-ru
 3. Installs starter personas/teams/themes/skills into `~/.pi/agent/` and the safety
    rules to `~/.pi/damage-control-rules.yaml` (where the engines read them) — **never overwriting existing files**
 4. Adds two entries to the `extensions` array of `~/.pi/agent/settings.json`
+5. On a FRESH install only: enables the visual starter set (team grid, expert grid,
+   chains board, subagent cards, minimal footer) so the first session already shows
+   the boards. Re-installs never touch the user's own engine toggles.
 
 Then verify:
 

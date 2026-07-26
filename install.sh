@@ -153,6 +153,13 @@ if [ -f "$SETTINGS" ]; then
   fi
 fi
 
+# Fresh install vs re-install: on a re-install the user's own engine toggles
+# are authoritative and the starter set must never be pushed on them.
+FRESH=1
+if [ -f "$SETTINGS" ] && grep -q "agentic-teams/slash" "$SETTINGS" 2>/dev/null; then
+  FRESH=0
+fi
+
 legacy="$(node -e '
   const fs = require("fs");
   const [settingsPath, dest] = process.argv.slice(1);
@@ -188,6 +195,9 @@ if [ "$DRY" = 1 ]; then
   say "  ${D}[dry-run]${N} settings.json: remove stale/legacy entries, add:"
   say "  ${D}[dry-run]${N}   $DEST/slash/agentic-teams.ts"
   say "  ${D}[dry-run]${N}   $DEST/slash/agent-slash.ts"
+  if [ "$FRESH" = 1 ]; then
+    say "  ${D}[dry-run]${N} fresh install → would offer the visual starter set (6 engines)"
+  fi
 else
   if [ -f "$SETTINGS" ]; then
     BACKUP="$SETTINGS.bak-$(date +%Y%m%d-%H%M%S)"
@@ -217,6 +227,38 @@ else
     fs.writeFileSync(settingsPath, JSON.stringify(s, null, 2) + "\n");
   ' "$SETTINGS" "$DEST" "$REPLACE_LEGACY"
   ok "settings.json wired (slash layer active, engine toggles preserved)"
+
+  # Visual starter set (fresh installs only): the boards are the product's face —
+  # a first session with everything off looks broken to a newcomer.
+  if [ "$FRESH" = 1 ]; then
+    STARTER=1
+    if [ "$YES" != 1 ] && [ -t 0 ]; then
+      printf "  Enable the visual starter set (team grid, expert grid, chains board, subagent cards, minimal footer)? [Y/n] "
+      read -r answer
+      case "$answer" in
+        n|N|no|NO) STARTER=0 ;;
+        *) ;;
+      esac
+    fi
+    if [ "$STARTER" = 1 ]; then
+      node -e '
+        const fs = require("fs");
+        const [settingsPath, dest] = process.argv.slice(1);
+        const s = JSON.parse(fs.readFileSync(settingsPath, "utf-8"));
+        const list = Array.isArray(s.extensions) ? s.extensions : [];
+        const have = new Set(list.map(p => typeof p === "string" ? p.split("/").pop() : ""));
+        const starter = ["minimal.ts", "agent-chain.ts", "cross-agent.ts", "agent-team.ts", "pi-pi.ts", "subagent-widget.ts"];
+        for (const f of starter) {
+          if (!have.has(f)) list.push(dest + "/extensions/" + f);
+        }
+        s.extensions = list;
+        fs.writeFileSync(settingsPath, JSON.stringify(s, null, 2) + "\n");
+      ' "$SETTINGS" "$DEST"
+      ok "visual starter set enabled (turn any of it off later: /pi-list · /pi-off)"
+    else
+      say "  ${D}starter set skipped — enable features any time with /pi-team, /pi-experts, …${N}"
+    fi
+  fi
 fi
 
 # ── done ────────────────────────────────────────────────────────────────────

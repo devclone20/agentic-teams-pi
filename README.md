@@ -73,6 +73,11 @@ pi
 pi                # anywhere
 ```
 
+A fresh install also enables the **visual starter set** — team grid, expert grid, chains
+board, subagent cards and the minimal footer — so your first session already shows the
+boards (skip it with `n` at the prompt, or trim it any time: each feature's own command
+turns it off, `/pi-off` turns off everything). Re-installs never touch your toggles.
+
 Then type:
 
 ```
