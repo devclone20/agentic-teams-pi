@@ -1,0 +1,14 @@
+{
+  "name": "agentic-teams-pi",
+  "private": true,
+  "type": "module",
+  "description": "Every Pi extension as an in-session slash command — agent teams, chains, subagents, P2P coms, safety rails.",
+  "dependencies": {
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.82.1",
+    "@earendil-works/pi-tui": "^0.82.1",
+    "@sinclair/typebox": "^0.34.0"
+  }
+}

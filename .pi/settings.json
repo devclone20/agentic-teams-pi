@@ -1,0 +1,5 @@
+{
+  "theme": "synthwave",
+  "prompts": ["../.claude/commands"],
+  "extensions": ["../slash/agentic-teams.ts", "../slash/agent-slash.ts"]
+}
