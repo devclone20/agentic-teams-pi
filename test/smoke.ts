@@ -125,7 +125,7 @@ for (const p of expectedPersonas) {
 const { REGISTRY, allEngineFiles } = await import(join(ROOT, "slash", "agentic-teams.ts"));
 
 const expected = [
-	"teams", "pi-list", "commands-pi", "pi-themes", "pi-off",
+	"teams", "pi-list", "commands-pi", "pi-themes", "pi-off", "clear",
 	...REGISTRY.map((f: { cmd: string }) => f.cmd),
 ];
 

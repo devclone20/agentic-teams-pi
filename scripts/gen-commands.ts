@@ -45,6 +45,7 @@ L.push("| `/teams` | Shows every agent team, chain and persona available right n
 L.push("| `/pi-list` | Status board of every feature | Grouped list with ●/○ state dots and one-line descriptions |");
 L.push("| `/commands-pi` | Full in-session reference | Every command, what it unlocks, personas, prompt templates |");
 L.push("| `/pi-themes [name]` | Instant theme switch | Theme picker (or direct switch by name, with autocomplete) |");
+L.push("| `/clear` | Wipes every message from the screen (fresh session) | A clean terminal with only your agent boards and widgets |");
 L.push("| `/pi-off` | Deactivates every engine at once | Summary of what was turned off; plain pi again |");
 L.push("");
 

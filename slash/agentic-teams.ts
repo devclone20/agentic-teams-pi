@@ -755,6 +755,21 @@ export default function (pi: ExtensionAPI) {
 		});
 	}
 
+	// ── /clear — wipe the transcript, keep the boards ─────────────────────
+
+	pi.registerCommand("clear", {
+		description: "Wipe every message from the screen — fresh session, agent boards stay",
+		handler: async (_args, ctx) => {
+			stash({
+				kind: "on",
+				title: "Screen cleared",
+				detail: "Fresh session — engines, boards and toggles intact.",
+			});
+			const result = await ctx.newSession();
+			if (result.cancelled) unstash();
+		},
+	});
+
 	// ── /pi-off — deactivate everything ───────────────────────────────────
 
 	pi.registerCommand("pi-off", {
@@ -899,6 +914,7 @@ export default function (pi: ExtensionAPI) {
 			L.push(`   ${pad(yellow("/pi-list"), 24)} status board of every feature`);
 			L.push(`   ${pad(yellow("/commands-pi"), 24)} this table`);
 			L.push(`   ${pad(yellow("/pi-themes [name]"), 24)} switch theme instantly (picker or by name)`);
+			L.push(`   ${pad(yellow("/clear"), 24)} wipe every message — fresh session, boards stay`);
 			L.push(`   ${pad(yellow("/pi-off"), 24)} deactivate every engine at once`);
 			L.push("");
 
@@ -990,7 +1006,7 @@ export default function (pi: ExtensionAPI) {
 		themeNames = (ctx.ui.getAllThemes?.() ?? []).map((t) => t.name);
 
 		const toggled = unstash();
-		if (event.reason === "reload" && toggled) {
+		if ((event.reason === "reload" || event.reason === "new") && toggled) {
 			const dot = toggled.kind === "on" ? green("●") : dim("○");
 			ctx.ui.notify(`${dot} ${bold(toggled.title)}\n${toggled.detail}`, toggled.kind === "on" ? "success" : "info");
 			return;

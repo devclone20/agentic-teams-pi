@@ -14,6 +14,7 @@ live in the current session (no restart). Mode commands take `off` as an argumen
 | `/pi-list` | Status board of every feature | Grouped list with ●/○ state dots and one-line descriptions |
 | `/commands-pi` | Full in-session reference | Every command, what it unlocks, personas, prompt templates |
 | `/pi-themes [name]` | Instant theme switch | Theme picker (or direct switch by name, with autocomplete) |
+| `/clear` | Wipes every message from the screen (fresh session) | A clean terminal with only your agent boards and widgets |
 | `/pi-off` | Deactivates every engine at once | Summary of what was turned off; plain pi again |
 
 ## Orchestration

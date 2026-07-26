@@ -159,7 +159,7 @@ export const RESERVED_NAMES = new Set([
 	"login", "logout", "model", "name", "new", "quit", "reload", "resume",
 	"scoped-models", "session", "settings", "share", "tree", "trust",
 	// agentic-teams meta + toggles
-	"teams", "pi-list", "commands-pi", "pi-themes", "pi-off",
+	"teams", "pi-list", "commands-pi", "pi-themes", "pi-off", "clear",
 	"pi-team", "pi-chain", "pi-sub", "pi-experts", "pi-tilldone", "pi-system",
 	"pi-cross", "pi-replay", "pi-gate", "pi-coms", "pi-coms-net", "pi-damage",
 	"pi-focus", "pi-minimal", "pi-counter", "pi-cycler",
@@ -360,10 +360,19 @@ export default function (pi: ExtensionAPI) {
 			pi.registerCommand(command, {
 				description: `[${label}] ${shortDesc}`.slice(0, 200),
 				handler: async (args: string, hctx: any) => {
-					const task = (args || "").trim();
+					let task = (args || "").trim();
 					if (!task) {
-						hctx.ui.notify(`Usage: /${command} <task>`, "warning");
-						return;
+						// Bare invocation: ask for the task instead of failing with usage.
+						if (!hctx.hasUI) {
+							hctx.ui.notify(`Usage: /${command} <task>`, "warning");
+							return;
+						}
+						const answer = await hctx.ui.input(
+							`/${command} — ${shortDesc || "dispatch this agent"}`,
+							"Describe the task for this agent…",
+						);
+						task = (answer || "").trim();
+						if (!task) return; // cancelled
 					}
 
 					hctx.ui.setStatus("agent-slash", `Running /${command}…`);

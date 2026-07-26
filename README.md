@@ -111,6 +111,7 @@ inside any session via `/commands-pi`.
 | `/pi-list` | Status board of every feature | Grouped board with ●/○ dots: what's on, what's available |
 | `/commands-pi` | Full in-session reference | Every command + what it unlocks + personas + prompt templates |
 | `/pi-themes [name]` | Instant theme switch (autocompletes names) | Theme picker, or direct switch |
+| `/clear` | Wipe every message from the screen — fresh session | A clean terminal with only your agent boards and widgets |
 | `/pi-off` | Panic button: deactivate every engine | Summary of what was turned off |
 
 ### Orchestration
