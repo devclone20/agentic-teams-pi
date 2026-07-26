@@ -24,6 +24,7 @@ import { Text, type AutocompleteItem, truncateToWidth, visibleWidth } from "@ear
 import { spawn } from "child_process";
 import { readdirSync, readFileSync, existsSync, mkdirSync, unlinkSync } from "fs";
 import { join, resolve } from "path";
+import { homedir } from "os";
 import { applyExtensionDefaults } from "./themeMap.ts";
 
 // ── Types ────────────────────────────────────────
@@ -146,8 +147,11 @@ function scanAgentDirs(cwd: string): AgentDef[] {
 		join(cwd, "agents"),
 		join(cwd, ".claude", "agents"),
 		join(cwd, ".pi", "agents"),
+		join(cwd, ".pi", "agents", "pi-pi"),
 		// Global fallback: user-level agents (cwd dirs listed first so project wins on dedupe)
+		join(homedir(), ".claude", "agents"),
 		join(getAgentDir(), "agents"),
+		join(getAgentDir(), "agents", "pi-pi"),
 	];
 
 	const agents: AgentDef[] = [];
@@ -755,6 +759,7 @@ ${agentCatalog}`,
 		// DORMANT: do NOT auto-activate a team and do NOT strip tools at startup.
 		// The main agent stays fully normal until the user runs /agents-team.
 		teamActive = false;
+		updateWidget(); // show the board (dormant hint or member grid) from boot
 
 		const teamNames = Object.keys(teams);
 		_ctx.ui.setStatus("agent-team", `Team: (none) — ${allAgentDefs.length} agents, ${teamNames.length} teams`);

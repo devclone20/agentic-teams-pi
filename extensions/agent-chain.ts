@@ -28,6 +28,7 @@ import { Text, truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
 import { spawn } from "child_process";
 import { readFileSync, existsSync, readdirSync, mkdirSync, unlinkSync } from "fs";
 import { join, resolve } from "path";
+import { homedir } from "os";
 import { applyExtensionDefaults } from "./themeMap.ts";
 
 // ── Types ────────────────────────────────────────
@@ -165,8 +166,11 @@ function scanAgentDirs(cwd: string): Map<string, AgentDef> {
 		join(cwd, "agents"),
 		join(cwd, ".claude", "agents"),
 		join(cwd, ".pi", "agents"),
+		join(cwd, ".pi", "agents", "pi-pi"),
 		// Global fallback: user-level agents (cwd dirs listed first so project wins on dedupe)
+		join(homedir(), ".claude", "agents"),
 		join(getAgentDir(), "agents"),
+		join(getAgentDir(), "agents", "pi-pi"),
 	];
 
 	const agents = new Map<string, AgentDef>();
