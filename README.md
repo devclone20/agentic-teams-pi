@@ -1,4 +1,14 @@
-# agentic-teams-pi
+<div align="center">
+
+<img src="assets/hero.svg" alt="agentic-teams-pi — every Pi extension as an in-session slash command" width="920">
+
+[![license](https://img.shields.io/badge/license-MIT-72f1b8?style=flat-square&labelColor=16121f)](LICENSE)
+[![pi](https://img.shields.io/badge/pi-%E2%89%A5%200.82-36f9f6?style=flat-square&labelColor=16121f)](https://github.com/badlogic/pi-mono)
+[![engines](https://img.shields.io/badge/engines-18-ff7edb?style=flat-square&labelColor=16121f)](docs/EXTENSIONS.md)
+[![commands](https://img.shields.io/badge/commands-68-fede5d?style=flat-square&labelColor=16121f)](docs/COMMANDS.md)
+[![tests](https://img.shields.io/badge/tests-smoke%20%2B%20zero--token%20RPC%20E2E-72f1b8?style=flat-square&labelColor=16121f)](test)
+
+</div>
 
 **Every Pi extension as an in-session slash command.** Agent teams, pipelines, subagents,
 peer-to-peer coms and safety rails — activated and deactivated with a single command,
@@ -35,6 +45,15 @@ Under the hood, each command writes the engine into `~/.pi/agent/settings.json` 
 Pi's extension reload — so the engine's commands, tools and widgets appear (or disappear)
 **live in the current session**, and the choice persists for future sessions until you
 toggle it back.
+
+## What your session looks like
+
+Live boards for everything: expert grids answering in parallel, dispatcher cards animating
+on every `dispatch_agent`, pipeline steps lighting up, subagent cards streaming their work:
+
+<div align="center">
+<img src="assets/boards.svg" alt="The live boards: expert grid, team dispatcher cards, chain pipeline and subagent cards" width="960">
+</div>
 
 ---
 
@@ -186,7 +205,33 @@ skill + bash) + ten Pi-framework experts.
 
 ## How a toggle works
 
+One switchboard, four engine families — a command flips the wiring and reloads in place:
+
 ```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#1d1830','primaryTextColor':'#e8e3f5','primaryBorderColor':'#ff7edb','lineColor':'#8a7fa8','fontFamily':'monospace','clusterBkg':'#16121f','clusterBorder':'#2a2139','edgeLabelBackground':'#16121f'}}}%%
+flowchart LR
+    U(["you type /pi-team"]):::you --> M["slash/agentic-teams.ts<br/>the switchboard"]:::master
+    M -->|"writes engine path"| S[("settings.json")]:::store
+    M -->|"ctx.reload()"| R{{"live reload<br/>same session · context kept"}}:::reload
+    S -.-> R
+    R --> O["🎛 Orchestration<br/>team · chain · sub · experts"]:::orch
+    R --> C["📡 Communication<br/>coms · coms-net"]:::coms
+    R --> SA["🛡 Safety<br/>damage strict / continue"]:::safe
+    R --> I["🎨 Interface & Workflow<br/>footer · themes · replay · gate"]:::iface
+    classDef you fill:#241a2e,stroke:#fede5d,color:#fede5d
+    classDef master fill:#2a1630,stroke:#ff7edb,color:#ff7edb
+    classDef store fill:#1d1830,stroke:#8a7fa8,color:#c8bfe0
+    classDef reload fill:#152530,stroke:#36f9f6,color:#36f9f6
+    classDef orch fill:#1d1830,stroke:#6a7bdb,color:#9fb0ff
+    classDef coms fill:#152530,stroke:#36f9f6,color:#36f9f6
+    classDef safe fill:#241a22,stroke:#f97e72,color:#f9a292
+    classDef iface fill:#182b22,stroke:#72f1b8,color:#72f1b8
+```
+
+And the full life of a switch — on, off, on again, always the same command:
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'actorBkg':'#1d1830','actorTextColor':'#e8e3f5','actorBorder':'#ff7edb','actorLineColor':'#4a3f66','signalColor':'#8a7fa8','signalTextColor':'#c8bfe0','noteBkgColor':'#241a2e','noteTextColor':'#fede5d','noteBorderColor':'#fede5d','fontFamily':'monospace'}}}%%
 sequenceDiagram
     participant You
     participant Session as pi session
@@ -261,31 +306,13 @@ For different machines, start the hub (`bun scripts/coms-net-server.ts`) and use
 
 ## Project layout
 
-```
-agentic-teams-pi/
-├── slash/
-│   ├── agentic-teams.ts     # master: every /pi-* switch + /teams + boards (REGISTRY = source of truth)
-│   └── agent-slash.ts       # every persona as its own /command
-├── extensions/              # 18 engines + shared themeMap helper (all work standalone with -e too)
-├── .pi/
-│   ├── settings.json        # repo sessions auto-load the slash layer
-│   ├── agents/              # starter personas + teams.yaml + agent-chain.yaml + pi-pi experts
-│   ├── themes/              # 11 themes
-│   └── damage-control-rules.yaml
-├── AGENTS.md                # install/usage guide for AI agents (both paths)
-├── docs/
-│   ├── COMMANDS.md          # generated reference (just gen-docs)
-│   ├── EXTENSIONS.md        # pro path: per-engine reference (-e workflow)
-│   └── THEME.md · TOOLS.md · RESERVED_KEYS.md · specs/
-├── scripts/
-│   ├── coms-net-server.ts   # HTTP/SSE hub for /pi-coms-net
-│   └── gen-commands.ts      # regenerates docs/COMMANDS.md from the REGISTRY
-├── test/
-│   ├── smoke.ts             # loads every module, asserts zero command collisions + full coverage
-│   └── rpc-check.sh         # end-to-end: real pi session, toggles driven over RPC, zero tokens
-├── install.sh · uninstall.sh
-└── justfile                 # just pi · just smoke · just rpc-check · just gen-docs …
-```
+<div align="center">
+<img src="assets/worktree.svg" alt="Colored worktree: slash/ command layer, extensions/ engines, .pi/ starter kit, docs, tests, installers" width="960">
+</div>
+
+Also in the tree: `scripts/coms-net-server.ts` (the HTTP/SSE hub for `/pi-coms-net`),
+`scripts/gen-commands.ts` (regenerates docs/COMMANDS.md from the REGISTRY) and the
+`justfile` (`just pi · just smoke · just rpc-check · just gen-docs · just ext-*`).
 
 ## Requirements
 

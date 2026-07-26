@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1060 560" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff7edb" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#36f9f6" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1060" height="560" rx="14" fill="#16121f"/>
+  <rect x="1.5" y="1.5" width="1057" height="557" rx="13" fill="none" stroke="#2a2139" stroke-width="3"/>
+  <rect x="0" y="552" width="1060" height="4" fill="url(#edge)" opacity="0.85"/>
+
+  <circle cx="28" cy="26" r="6" fill="#f97e72"/>
+  <circle cx="50" cy="26" r="6" fill="#fede5d"/>
+  <circle cx="72" cy="26" r="6" fill="#72f1b8"/>
+  <text x="530" y="31" text-anchor="middle" font-size="13" fill="#8a7fa8">the worktree — what lives where</text>
+
+  <!-- tree -->
+  <g>
+    <text x="36" y="72" fill="#ff7edb" font-weight="bold">agentic-teams-pi/</text>
+
+    <text x="36" y="98"><tspan fill="#4a3f66">├── </tspan><tspan fill="#ff7edb" font-weight="bold">slash/</tspan><tspan fill="#8a7fa8">                        ◆ the product — always-on command layer</tspan></text>
+    <text x="36" y="124"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#fede5d" font-weight="bold">agentic-teams.ts</tspan><tspan fill="#8a7fa8">          21 commands · REGISTRY = single source of truth</tspan></text>
+    <text x="36" y="150"><tspan fill="#4a3f66">│   └── </tspan><tspan fill="#fede5d" font-weight="bold">agent-slash.ts</tspan><tspan fill="#8a7fa8">            every agent persona becomes /name</tspan></text>
+
+    <text x="36" y="176"><tspan fill="#4a3f66">├── </tspan><tspan fill="#ff7edb" font-weight="bold">extensions/</tspan><tspan fill="#8a7fa8">                   18 engines — switched live, mid-session</tspan></text>
+    <text x="36" y="202"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#36f9f6">agent-team.ts</tspan><tspan fill="#8a7fa8">             team grid + dispatch_agent</tspan></text>
+    <text x="36" y="228"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#36f9f6">agent-chain.ts</tspan><tspan fill="#8a7fa8">            pipeline board · plan </tspan><tspan fill="#72f1b8">─▶</tspan><tspan fill="#8a7fa8"> build </tspan><tspan fill="#72f1b8">─▶</tspan><tspan fill="#8a7fa8"> review</tspan></text>
+    <text x="36" y="254"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#36f9f6">subagent-widget.ts</tspan><tspan fill="#8a7fa8">        live cards for background agents</tspan></text>
+    <text x="36" y="280"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#36f9f6">pi-pi.ts</tspan><tspan fill="#8a7fa8">                  grid of 9 parallel Pi-framework experts</tspan></text>
+    <text x="36" y="306"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#36f9f6">coms.ts · coms-net.ts</tspan><tspan fill="#8a7fa8">     agent ↔ agent messaging (sockets / HTTP)</tspan></text>
+    <text x="36" y="332"><tspan fill="#4a3f66">│   ├── </tspan><tspan fill="#36f9f6">damage-control*.ts</tspan><tspan fill="#8a7fa8">        🛡 safety rails: strict | continue</tspan></text>
+    <text x="36" y="358"><tspan fill="#4a3f66">│   └── </tspan><tspan fill="#36f9f6">minimal · focus · counters</tspan><tspan fill="#8a7fa8">  interface engines (footer, themes, tallies)</tspan></text>
+
+    <text x="36" y="384"><tspan fill="#4a3f66">├── </tspan><tspan fill="#ff7edb" font-weight="bold">.pi/</tspan><tspan fill="#8a7fa8">                          starter kit: personas · teams.yaml · chains · 11 themes</tspan></text>
+    <text x="36" y="410"><tspan fill="#4a3f66">├── </tspan><tspan fill="#ff7edb" font-weight="bold">docs/</tspan><tspan fill="#8a7fa8">                         COMMANDS.md (generated) · EXTENSIONS.md (pro path)</tspan></text>
+    <text x="36" y="436"><tspan fill="#4a3f66">├── </tspan><tspan fill="#ff7edb" font-weight="bold">test/</tspan><tspan fill="#8a7fa8">                         smoke + zero-token live RPC end-to-end</tspan></text>
+
+    <text x="36" y="462"><tspan fill="#4a3f66">├── </tspan><tspan fill="#72f1b8" font-weight="bold">AGENTS.md</tspan><tspan fill="#8a7fa8">                     hand this repo to any LLM — it knows what to do</tspan></text>
+    <text x="36" y="488"><tspan fill="#4a3f66">├── </tspan><tspan fill="#f97e72" font-weight="bold">install.sh · uninstall.sh</tspan><tspan fill="#8a7fa8">     one command · backups · dry-run · starter set</tspan></text>
+    <text x="36" y="514"><tspan fill="#4a3f66">└── </tspan><tspan fill="#72f1b8" font-weight="bold">README.md</tspan><tspan fill="#8a7fa8">                     you are here</tspan></text>
+  </g>
+</svg>

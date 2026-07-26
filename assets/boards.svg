@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 660" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff7edb" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#36f9f6" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1100" height="660" rx="14" fill="#16121f"/>
+  <rect x="1.5" y="1.5" width="1097" height="657" rx="13" fill="none" stroke="#2a2139" stroke-width="3"/>
+
+  <circle cx="28" cy="26" r="6" fill="#f97e72"/>
+  <circle cx="50" cy="26" r="6" fill="#fede5d"/>
+  <circle cx="72" cy="26" r="6" fill="#72f1b8"/>
+  <text x="550" y="31" text-anchor="middle" font-size="13" fill="#8a7fa8">π — what your session looks like with the boards on</text>
+
+  <!-- header -->
+  <text x="30" y="66"><tspan fill="#ff7edb" font-weight="bold">◆ AGENT TEAMS</tspan><tspan fill="#8a7fa8">   </tspan><tspan fill="#72f1b8">5</tspan><tspan fill="#8a7fa8"> teams · </tspan><tspan fill="#72f1b8">5</tspan><tspan fill="#8a7fa8"> chains · </tspan><tspan fill="#72f1b8">28</tspan><tspan fill="#8a7fa8"> agents loaded</tspan></text>
+
+  <!-- expert grid (pi-pi) -->
+  <text x="30" y="96" fill="#8a7fa8" font-size="13">/pi-experts — the expert grid, answering in parallel</text>
+
+  <g>
+    <rect x="30" y="108" width="330" height="96" rx="8" fill="#1d1830" stroke="#6a7bdb" stroke-width="2"/>
+    <text x="46" y="132" fill="#9fb0ff" font-weight="bold">Agent Expert</text>
+    <text x="46" y="156"><tspan fill="#36f9f6">● working</tspan><tspan fill="#8a7fa8">  (7s)</tspan></text>
+    <text x="46" y="180" fill="#8a7fa8">researching agent frontmatter…</text>
+
+    <rect x="385" y="108" width="330" height="96" rx="8" fill="#182b22" stroke="#72f1b8" stroke-width="2"/>
+    <text x="401" y="132" fill="#72f1b8" font-weight="bold">Theme Expert</text>
+    <text x="401" y="156"><tspan fill="#72f1b8">✓ done</tspan><tspan fill="#8a7fa8">  (12s)</tspan></text>
+    <text x="401" y="180" fill="#8a7fa8">color tokens mapped — report ready</text>
+
+    <rect x="740" y="108" width="330" height="96" rx="8" fill="#241a22" stroke="#f97e72" stroke-width="2"/>
+    <text x="756" y="132" fill="#f9a292" font-weight="bold">Tui Expert</text>
+    <text x="756" y="156" fill="#8a7fa8">○ idle</text>
+    <text x="756" y="180" fill="#4a3f66">—</text>
+  </g>
+
+  <!-- team grid -->
+  <text x="30" y="240" fill="#8a7fa8" font-size="13">/pi-team → /agents-team — the dispatcher grid, cards animate on every dispatch_agent</text>
+
+  <g>
+    <rect x="30" y="252" width="330" height="96" rx="8" fill="#182b22" stroke="#72f1b8" stroke-width="2"/>
+    <text x="46" y="276" fill="#72f1b8" font-weight="bold">scout</text>
+    <text x="46" y="300"><tspan fill="#72f1b8">✓ done</tspan><tspan fill="#8a7fa8">  (8s) | Tools: 5</tspan></text>
+    <text x="46" y="324" fill="#8a7fa8">auth flow mapped, 3 key files</text>
+
+    <rect x="385" y="252" width="330" height="96" rx="8" fill="#152530" stroke="#36f9f6" stroke-width="2"/>
+    <text x="401" y="276" fill="#36f9f6" font-weight="bold">builder</text>
+    <text x="401" y="300"><tspan fill="#36f9f6">● running</tspan><tspan fill="#8a7fa8">  (21s) | Tools: 9</tspan></text>
+    <text x="401" y="324" fill="#8a7fa8">editing src/auth.ts…</text>
+
+    <rect x="740" y="252" width="330" height="96" rx="8" fill="#1d1830" stroke="#4a3f66" stroke-width="2"/>
+    <text x="756" y="276" fill="#c8bfe0" font-weight="bold">reviewer</text>
+    <text x="756" y="300" fill="#8a7fa8">○ queued</text>
+    <text x="756" y="324" fill="#4a3f66">waiting for builder…</text>
+  </g>
+
+  <!-- chain -->
+  <text x="30" y="384" fill="#8a7fa8" font-size="13">/pi-chain — pipelines: each step feeds the next</text>
+  <g>
+    <rect x="30" y="398" width="180" height="46" rx="8" fill="#182b22" stroke="#72f1b8" stroke-width="2"/>
+    <text x="120" y="426" text-anchor="middle"><tspan fill="#72f1b8" font-weight="bold">planner ✓</tspan></text>
+    <text x="238" y="426" fill="#4a3f66" font-weight="bold">──▶</text>
+    <rect x="290" y="398" width="180" height="46" rx="8" fill="#152530" stroke="#36f9f6" stroke-width="2"/>
+    <text x="380" y="426" text-anchor="middle"><tspan fill="#36f9f6" font-weight="bold">builder ●</tspan></text>
+    <text x="498" y="426" fill="#4a3f66" font-weight="bold">──▶</text>
+    <rect x="550" y="398" width="180" height="46" rx="8" fill="#1d1830" stroke="#4a3f66" stroke-width="2"/>
+    <text x="640" y="426" text-anchor="middle"><tspan fill="#c8bfe0">reviewer ○</tspan></text>
+    <text x="770" y="426" fill="#8a7fa8" font-size="13">plan-build-review · 3 steps</text>
+  </g>
+
+  <!-- subagent -->
+  <text x="30" y="482" fill="#8a7fa8" font-size="13">/pi-sub → /sub — background agents with streaming cards</text>
+  <g>
+    <rect x="30" y="494" width="1040" height="54" rx="8" fill="#241a2e" stroke="#fede5d" stroke-width="2"/>
+    <text x="46" y="516"><tspan fill="#fede5d" font-weight="bold">● Subagent #1</tspan><tspan fill="#8a7fa8">  summarize the repo structure  (14s) | Tools: 3</tspan></text>
+    <text x="46" y="538" fill="#8a7fa8">reading extensions/agent-team.ts…</text>
+  </g>
+
+  <!-- editor + footer -->
+  <rect x="30" y="570" width="1040" height="2" fill="#36f9f6" opacity="0.7"/>
+  <rect x="30" y="582" width="10" height="18" fill="#e8e3f5"/>
+  <rect x="30" y="612" width="1040" height="2" fill="#36f9f6" opacity="0.7"/>
+  <text x="30" y="640"><tspan fill="#c8bfe0">deepseek/deepseek-v4-pro</tspan><tspan fill="#8a7fa8"> · </tspan><tspan fill="#ff7edb">Team: pi-pi</tspan></text>
+  <text x="1070" y="640" text-anchor="end"><tspan fill="#72f1b8">[###</tspan><tspan fill="#4a3f66">-------]</tspan><tspan fill="#8a7fa8"> 34%</tspan></text>
+</svg>
