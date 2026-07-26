@@ -16,7 +16,7 @@
 import { StringEnum, type ThinkingLevel } from "@earendil-works/pi-ai";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { DynamicBorder } from "@earendil-works/pi-coding-agent";
-import { Container, Text } from "@earendil-works/pi-tui";
+import { Container, Text, truncateToWidth } from "@earendil-works/pi-tui";
 import { Type } from "@sinclair/typebox";
 const { spawn } = require("child_process") as any;
 import * as fs from "fs";
@@ -129,6 +129,22 @@ export default function (pi: ExtensionAPI) {
 
 	function updateWidgets() {
 		if (!widgetCtx) return;
+
+		// Dormant hint: keep the feature visible when no subagent is running.
+		if (agents.size === 0) {
+			widgetCtx.ui.setWidget("subagent-hint", (_tui: any, theme: any) => ({
+				render(width: number): string[] {
+					const line =
+						`${theme.fg("accent", "⚡ Subagents ready")}  ·  ` +
+						`${theme.fg("dim", "spawn a live card with ")}${theme.fg("accent", "/sub <task>")}` +
+						`${theme.fg("dim", "  ·  /subcont <id> <prompt>  ·  /subrm <n>  ·  /subclear")}`;
+					return ["", truncateToWidth(line, width, "")];
+				},
+				invalidate() {},
+			}));
+		} else {
+			widgetCtx.ui.setWidget("subagent-hint", undefined);
+		}
 
 		for (const [id, state] of Array.from(agents.entries())) {
 			const key = `sub-${id}`;
@@ -398,6 +414,7 @@ export default function (pi: ExtensionAPI) {
 			}
 			ctx.ui.setWidget(`sub-${args.id}`, undefined);
 			agents.delete(args.id);
+			updateWidgets();
 
 			return {
 				content: [{ type: "text", text: `Subagent #${args.id} removed successfully.` }],
@@ -546,6 +563,7 @@ export default function (pi: ExtensionAPI) {
 
 			ctx.ui.setWidget(`sub-${num}`, undefined);
 			agents.delete(num);
+			updateWidgets();
 		},
 	});
 
@@ -568,6 +586,7 @@ export default function (pi: ExtensionAPI) {
 			const total = agents.size;
 			agents.clear();
 			nextId = 1;
+			updateWidgets();
 
 			const msg = total === 0
 				? "No subagents to clear."
@@ -589,5 +608,6 @@ export default function (pi: ExtensionAPI) {
 		agents.clear();
 		nextId = 1;
 		widgetCtx = ctx;
+		updateWidgets(); // show the dormant hint from boot
 	});
 }

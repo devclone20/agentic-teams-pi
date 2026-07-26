@@ -300,7 +300,15 @@ export default function (pi: ExtensionAPI) {
 			return {
 				render(width: number): string[] {
 					if (!activeChain || stepStates.length === 0) {
-						text.setText(theme.fg("dim", "No chain active. Use /chain to select one."));
+						// Dormant board: show what pipelines exist and how to run one.
+						const lines = [
+							`${theme.fg("accent", `${chains.length} chains available`)}  ·  ${theme.fg("dim", "Use ")}${theme.fg("accent", "/chain")}${theme.fg("dim", " to run a pipeline")}`,
+						];
+						for (const c of chains) {
+							const desc = c.description ? ` — ${c.description}` : "";
+							lines.push(`${theme.fg("accent", c.name.padEnd(20))}${theme.fg("dim", `${c.steps.length} steps${desc}`)}`);
+						}
+						text.setText(lines.join("\n"));
 						return text.render(width);
 					}
 
@@ -769,6 +777,7 @@ ${agentCatalog}
 
 		// Reload chains + clear agentSessions map (all agents start fresh)
 		loadChains(_ctx.cwd);
+		updateWidget(); // show the pipeline board (dormant list or step cards) from boot
 
 		if (chains.length === 0) {
 			_ctx.ui.notify("No chains found in .pi/agents/agent-chain.yaml", "warning");
